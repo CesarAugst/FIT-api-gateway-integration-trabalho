@@ -44,15 +44,5 @@ function getNumero(){
   const segundos = data.getSeconds();
   return [horas, minutos, segundos].join('');
 }
-//montei uma logica para fazer o sku
-function getSku(){
-  const data = new Date(); // momento atual 
-  const horas = data.getHours();
-  const minutos = data.getMinutes();
-  const segundos = data.getSeconds();
-  const hhmmmss = [horas, minutos, segundos].join(':');
-
-  return `SKU-${hhmmmss}`;
-}
 
 module.exports = PedidosController;
