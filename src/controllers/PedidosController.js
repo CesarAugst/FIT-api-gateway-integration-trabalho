@@ -2,8 +2,22 @@ const knex = require("../database");
 
 class PedidosController {
   async index(request, response) {
-    //busca pedidos
-    const pedidos = await knex("pedido");
+    //pega paginacao da url
+    const { per_page, page } = request.query;
+    //define o array de pedidos
+    var pedidos = [];
+    //se possui paginacao
+    if(per_page && page){
+      //a menor pagina sempre sera a primeira
+      if (page < 1) page = 1;
+      //quanto pular para gerar ao primeiro registro da pagina
+      var offset = (page - 1) * per_page;
+      //busca todos os pedidos paginados
+      pedidos = await knex("pedido").limit(per_page).offset(offset);
+    }else{
+      //busca todos os pedidos
+      pedidos = await knex("pedido");
+    }
     //retorna pedidos para resposta da requisicao
     return response.json(pedidos);
   }
