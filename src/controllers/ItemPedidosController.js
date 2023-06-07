@@ -40,8 +40,18 @@ class ItemPedidosController {
   async index(request, response) {
     //pega pedido da url
     const { numero } = request.params;
+    //pega filtros da url
+    const { produto } = request.query;
     //busca item do pedido
-    const item_pedido_list = await knex("item_pedido").where({ numero });
+    const item_pedido_list = await knex("item_pedido")
+    .where((qb) => {
+      //filtro de pedido
+      qb.where({numero});
+      //filtro de produto
+      if(produto){
+        qb.where('item_pedido.produto', 'like', `%${produto}%`);
+      }
+    });
     //retorna os itens do pedido para resposta da requisicao
     return response.json(item_pedido_list);
   }
