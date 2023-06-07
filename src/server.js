@@ -4,21 +4,11 @@ const path = require("path");
 
 const swaggerDocument = require("./docs/swagger.json");
 const swaggerUI = require("swagger-ui-express");
-const uploadConfig = require("./configs/upload");
 const AppError = require("./utils/AppError");
 const express = require("express");
 const cors = require("cors");
 
 const app = express();
-
-app.use("/avatar", express.static(uploadConfig.UPLOADS_FOLDER));
-
-const demoExercisePath = path.resolve(__dirname, "..", "exercises", "gif")
-app.use("/exercise/demo", express.static(demoExercisePath));
-
-const thumbExercisesPath = path.resolve(__dirname, "..", "exercises", "thumb")
-app.use("/exercise/thumb", express.static(thumbExercisesPath));
-
 
 const routes = require("./routes");
 
