@@ -32,9 +32,9 @@ class ItemPedidosController {
     //pega pedido e indice da url
     const { numero, indice } = request.params;
     //busca item do pedido
-    const item_pedido = await knex("item_pedido").where({ numero, indice }).first();
+    const {status, payload} = await getItemPedido({ numero, indice });
     //retorna item do pedido para resposta da requisicao
-    return response.json(item_pedido);
+    return response.status(status).send(payload);
   }
 
   async index(request, response) {
@@ -83,6 +83,30 @@ async function getIndice(numero){
   }
   //retorna o ultimo indice + 1
   return last_indice.indice + 1
+}
+
+//logoca de busca de pedido
+async function getItemPedido({ numero = 0, indice = 0 }) {
+  //busca item do pedido
+  const item_pedido = await knex("item_pedido").where({ numero, indice }).first();
+
+  //payload da requisicao
+  var payload = item_pedido;
+  //status da requisicao
+  var status = 200;
+
+  //se nao encontrou nenhum pedido
+  if (typeof payload === 'undefined') {
+    //payload da resposta
+    payload = {
+      error: 'Not Found',
+      message: 'Item do Pedido não encontrado com esse número / indice.'
+    }
+    //status da resposta
+    status = 404;
+  } 
+  //retorna o status e o payload da requisicao
+  return { status, payload };
 }
 
 module.exports = ItemPedidosController;
