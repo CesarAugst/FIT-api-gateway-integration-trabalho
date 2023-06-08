@@ -4,22 +4,12 @@ class PedidosController {
   async index(request, response) {
     //pega paginacao da url
     const { per_page, page } = request.query;
-    //define o array de pedidos
-    var pedidos = [];
-    //se possui paginacao
-    if (per_page && page) {
-      //a menor pagina sempre sera a primeira
-      if (page < 1) page = 1;
-      //quanto pular para gerar ao primeiro registro da pagina
-      var offset = (page - 1) * per_page;
-      //busca todos os pedidos paginados
-      pedidos = await knex("pedido").limit(per_page).offset(offset);
-    } else {
-      //busca todos os pedidos
-      pedidos = await knex("pedido");
-    }
+
+    //payload da requisicao
+    const { payload } = await getPedidosPagination({per_page, page})
+
     //retorna pedidos para resposta da requisicao
-    return response.json(pedidos);
+    return response.json(payload);
   }
 
   async show(request, response) {
@@ -83,6 +73,31 @@ async function getPedido({ numero = 0 }) {
   } 
   //retorna o status e o payload da requisicao
   return { status, payload };
+}
+
+//logica de pedidos com paginacao
+async function getPedidosPagination({per_page = null, page = null}){
+    //define o array de pedidos
+    var pedidos = [];
+
+    //se possui paginacao
+    if (per_page && page) {
+      //a menor pagina sempre sera a primeira
+      if (page < 1) page = 1;
+      //quanto pular para gerar ao primeiro registro da pagina
+      var offset = (page - 1) * per_page;
+      //busca todos os pedidos paginados
+      pedidos = await knex("pedido").limit(per_page).offset(offset);
+    } else {
+      //busca todos os pedidos
+      pedidos = await knex("pedido");
+    }
+
+    //payload da requisicao
+    var payload = pedidos;
+
+    //retorna os pedidos
+    return {payload};
 }
 
 module.exports = PedidosController;
