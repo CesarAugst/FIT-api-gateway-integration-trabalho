@@ -11,7 +11,7 @@ npm run dev
 Conferir na documentação quais delas possuem
 
 ##Para acessar exemplos da api usando postman
-Use essa [https://api.postman.com/collections/11501755-26445ace-0b2b-445d-bf35-5232aba5513c?access_key=PMAT-01H38HEK0PM0GXXR3R4MFSP6KC](url)
+Use essa [url](https://api.postman.com/collections/11501755-26445ace-0b2b-445d-bf35-5232aba5513c?access_key=PMAT-01H38HEK0PM0GXXR3R4MFSP6KC)
 
 ### Scripts
 
