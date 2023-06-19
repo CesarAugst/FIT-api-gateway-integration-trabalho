@@ -11,6 +11,7 @@ const itemPedidosController = new ItemPedidosController();
 pedidosRoutes.post("/", pedidosController.create);
 pedidosRoutes.get("/:numero", pedidosController.show);
 pedidosRoutes.get("/", pedidosController.index);
+pedidosRoutes.get("/item/produto", pedidosController.filter);
 
 pedidosRoutes.post("/:numero/item", itemPedidosController.create);
 pedidosRoutes.get("/:numero/item/:indice", itemPedidosController.show);

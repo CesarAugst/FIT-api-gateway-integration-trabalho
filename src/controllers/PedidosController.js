@@ -40,6 +40,22 @@ class PedidosController {
     //retorna a criacao para a resposta da requisicao
     return response.json(pedido);
   }
+
+  async filter(request, response) {
+    //pega filtros da url
+    const { produto } = request.query;
+    //busca item do pedido
+    const pedido_list = await knex("pedido")
+    .where((qb) => {
+      //filtro de produto
+      if(produto){
+        qb.where('item_pedido.produto', 'like', `%${produto}%`);
+      }
+    })
+    .join("item_pedido", "pedido.numero", "item_pedido.numero");
+    //retorna os itens do pedido para resposta da requisicao
+    return response.json(pedido_list);
+  }
 }
 
 //montei uma logica para fazer um numero
