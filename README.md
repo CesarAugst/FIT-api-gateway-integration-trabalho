@@ -11,7 +11,7 @@
 - Conferir na documentação quais delas possuem
 
 ##Para acessar exemplos da api usando postman
-- [use essa url](https://api.postman.com/collections/11501755-26445ace-0b2b-445d-bf35-5232aba5513c?access_key=PMAT-01H38HEK0PM0GXXR3R4MFSP6KC)
+- [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/11501755-3ab73296-26ca-40fb-9d94-909146a4fc24?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D11501755-3ab73296-26ca-40fb-9d94-909146a4fc24%26entityType%3Dcollection%26workspaceId%3D75535e10-2e51-461e-aacf-abb02cd30f88)
 
 ### Scripts
 
